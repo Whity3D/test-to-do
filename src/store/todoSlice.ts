@@ -23,8 +23,7 @@ const todoSlice = createSlice({
       if (todo) todo.completed = !todo.completed;
     },
     clearCompleted: (state) => {
-      const filtered = state.todos.filter((t) => !t.completed);
-      state.todos = filtered;
+      state.todos = state.todos.filter((t) => !t.completed);
     },
     changeFilter: (state, action: PayloadAction<FilterState>) => {
       state.filter = action.payload;
