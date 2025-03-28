@@ -1,8 +1,8 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
 import tsParser from '@typescript-eslint/parser';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import reactPlugin from 'eslint-plugin-react';
@@ -10,13 +10,13 @@ import prettier from 'eslint-plugin-prettier';
 import airbnbTypeScript from 'eslint-config-airbnb-typescript';
 
 export default tseslint.config(
-  { ignores: ['node_modules/**','dist/**', '*log'] },
+  { ignores: ['node_modules/**', 'dist/**', '*log'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 'latest',
-      globals: globals.browser,
+      globals: { ...globals.browser, ...globals.vitest },
       sourceType: 'module',
       parser: tsParser,
       parserOptions: {
@@ -36,10 +36,7 @@ export default tseslint.config(
       ...typescriptEslint.configs.recommended.rules,
       ...reactPlugin.configs.recommended.rules,
       ...airbnbTypeScript.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'prettier/prettier': 'error',
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
@@ -50,5 +47,5 @@ export default tseslint.config(
         version: 'detect',
       },
     },
-  },
-)
+  }
+);
